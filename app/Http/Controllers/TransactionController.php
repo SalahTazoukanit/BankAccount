@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class TransactionController extends Controller
 {
@@ -24,8 +26,9 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
 
+        $user = Auth::user();
+
         $request->validate([
-            'user_id' => "required",
             'title' => 'string|required',
             'description' => 'string|sometimes',
             'date' => 'date|sometimes',
@@ -34,7 +37,7 @@ class TransactionController extends Controller
         ]);
 
         $transaction = Transaction::create([
-            "user_id" => 1,
+            "user_id" => $user->id,
             'title' => $request->title,
             'description' => $request->description,
             "date" => $request->date,
@@ -73,6 +76,7 @@ class TransactionController extends Controller
         ]);
 
         $transaction = Transaction::findOrFail($id);
+
         $transaction->update($request->all());
 
         return response()->json([

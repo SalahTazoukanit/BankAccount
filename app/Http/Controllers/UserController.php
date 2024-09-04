@@ -50,9 +50,10 @@ class UserController extends Controller
             if (auth('sanctum')->check()) {
                 auth()->user()->tokens()->delete();
             }
+            
             $user = User::where('email', $credentials['email'])->first();
-            $token = $user->createToken('authToken', ['*'])
-                ->plainTextToken;
+            $token = $user->createToken('authToken', ['*'])->plainTextToken;
+
             return response()->json([
                 'message' => 'Log successfully',
                 'token' => $token,
