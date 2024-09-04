@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,10 @@ Route::prefix('v1')->group(function () {
     Route::post('/transactions/post', [TransactionController::class, 'store'])->name("transactions.store");
     Route::put('/transactions/update/{id}', [TransactionController::class, 'update'])->name("transactions.update");
     Route::delete('/transactions/delete/{id}', [TransactionController::class, 'destroy'])->name("transactions.delete");
+});
+
+Route::prefix('v1')->group(function () {
+    Route::post('/users/register', [UserController::class, 'register'])->name("register.user");
+    Route::post('/users/login', [UserController::class, 'login'])->name("login.user");
+    Route::post('/users/logout', [UserController::class, 'logout'])->name("logout.user");
 });

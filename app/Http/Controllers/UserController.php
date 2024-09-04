@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -35,9 +37,43 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function login() {}
+    public function login(Request $request)
+    {
+        Log::info('Request data:', $request->all());
 
-    public function logout() {}
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required']
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            if (auth('sanctum')->check()) {
+                auth()->user()->tokens()->delete();
+            }
+            $user = User::where('email', $credentials['email'])->first();
+            $token = $user->createToken('authToken', ['*'])
+                ->plainTextToken;
+            return response()->json([
+                'message' => 'Log successfully',
+                'token' => $token,
+                'user' => $user
+            ]);
+        } else {
+            return response()->json(['message' => 'Invalid credentials'], 401);
+        }
+    }
+
+    public function logout()
+    {
+        Auth::user()->tokens->each(function ($token, $key) {
+            $token->delete();
+        });
+
+        return response()->json([
+            'message' => 'Logged out successfully!',
+            'status_code' => 200
+        ], 200);
+    }
 
     /**
      * Display a listing of the resource.
