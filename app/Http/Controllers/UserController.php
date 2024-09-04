@@ -55,6 +55,14 @@ class UserController extends Controller
      *             @OA\Property(property="user", ref="#/components/schemas/User"),
      *             @OA\Property(property="message", type="string", example="Utilisateur créé avec succès.")
      *         )
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Erreur de validation des données",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="The given data was invalid.")
+     *         )
      *     )
      * )
      */
@@ -157,18 +165,35 @@ class UserController extends Controller
      *             @OA\Property(property="message", type="string", example="Logged out successfully!"),
      *             @OA\Property(property="status_code", type="integer", example=200)
      *         )
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="Utilisateur non authentifié",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="User not authenticated!"),
+     *             @OA\Property(property="status_code", type="integer", example=401)
+     *         )
      *     )
      * )
      */
     public function logout()
     {
-        Auth::user()->tokens->each(function ($token, $key) {
-            $token->delete();
-        });
+        $user = Auth::user();
 
-        return response()->json([
-            'message' => 'Logged out successfully!',
-            'status_code' => 200
-        ], 200);
+        if ($user) {
+            // Suppression du jeton d'accès actuel
+            $user->currentAccessToken()->delete();
+
+            return response()->json([
+                'message' => 'Logged out successfully!',
+                'status_code' => 200
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'User not authenticated!',
+                'status_code' => 401
+            ], 401);
+        }
     }
 }
