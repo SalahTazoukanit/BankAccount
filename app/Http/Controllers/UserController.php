@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -15,14 +16,23 @@ class UserController extends Controller
             'password' => [
                 'required',
                 'string',
-                'min:8',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
                 'confirmed',
             ],
-            'password_confirmation' => [
-                'required',
-                'string',
-            ],
+            'password_confirmation' => 'required|same:password'
         ]);
+
+        $user = User::create([
+            "name" => $request->name,
+            "email" => $request->email,
+            "password" => $request->password,
+            "password_confirmation" => $request->password_confirmation,
+        ]);
+
+        return response()->json([
+            "user" => $user,
+            "message" => "Utilisateur créé avec succés ."
+        ], 200);
     }
 
     public function login() {}
