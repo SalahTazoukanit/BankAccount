@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,6 +9,23 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @OA\Schema(
+ *     schema="User",
+ *     type="object",
+ *     title="User",
+ *     description="Modèle représentant un utilisateur de l'application",
+ *     required={"name", "email", "password"},
+ *     @OA\Property(property="id", type="integer", description="Identifiant unique de l'utilisateur"),
+ *     @OA\Property(property="name", type="string", description="Nom de l'utilisateur", example="John Doe"),
+ *     @OA\Property(property="email", type="string", format="email", description="Adresse email de l'utilisateur", example="john.doe@example.com"),
+ *     @OA\Property(property="password", type="string", format="password", description="Mot de passe de l'utilisateur"),
+ *     @OA\Property(property="profile_photo_url", type="string", format="url", description="URL de la photo de profil de l'utilisateur"),
+ *     @OA\Property(property="email_verified_at", type="string", format="date-time", description="Date de vérification de l'email"),
+ *     @OA\Property(property="created_at", type="string", format="date-time", description="Date de création de l'utilisateur"),
+ *     @OA\Property(property="updated_at", type="string", format="date-time", description="Date de la dernière mise à jour de l'utilisateur")
+ * )
+ */
 class User extends Authenticatable
 {
     use HasApiTokens;
