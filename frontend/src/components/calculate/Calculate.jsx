@@ -48,7 +48,7 @@ const Calculate = () => {
           <div className="flex flex-col justify-center items-center border rounded-lg p-5 text-white bg-green-500 w-full">
             <h3>Crédit :</h3>
             <h2>{incomings + "€"}</h2>
-            <p className="text-white">Total du montant reçu</p>
+            <p className="text-white">Total des entrées</p>
           </div>
           <div className="flex flex-col justify-center items-center border rounded-lg p-5 text-white bg-red-500 w-full">
             <h3>Débit :</h3>
@@ -63,7 +63,7 @@ const Calculate = () => {
           ) : (
             <h2 className="text-red-600">{difference + "€"}</h2>
           )}
-          <p className="text-white">Total des depenses faites</p>
+          <p className="text-white">Porte monnaie</p>
         </div>
       </div>
     </>
