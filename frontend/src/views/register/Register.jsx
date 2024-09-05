@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "../../components/header/Header";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -27,15 +28,18 @@ const Register = () => {
   };
   return (
     <>
-      <div className="flex justify-center items-center">
-        <h1 className="text-green-500">S'Enregistrer</h1>
-        <div>
+      <div>
+        <Header />
+      </div>
+      <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center mt-16 gap-10">
+          <h1 className="">S'Enregistrer</h1>
           <form onSubmit={(e) => registerUser(e)} className="flex">
-            <div className="flex flex-col">
+            <div className="flex flex-col justify-center items-center gap-10">
               <label htmlFor="">
-                {" "}
-                Nom :
+                Nom <br />
                 <input
+                  className="border rounded w-80"
                   onChange={(e) => setName(e.target.value)}
                   type="text"
                   name="name"
@@ -43,8 +47,9 @@ const Register = () => {
               </label>
               <label htmlFor="">
                 {" "}
-                Email :
+                Email <br />
                 <input
+                  className="border rounded w-80"
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   name="email"
@@ -52,8 +57,9 @@ const Register = () => {
               </label>
               <label htmlFor="">
                 {" "}
-                Mot de passe :
+                Mot de passe <br />
                 <input
+                  className="border rounded w-80"
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   name="password"
@@ -61,15 +67,18 @@ const Register = () => {
               </label>
               <label htmlFor="">
                 {" "}
-                Confirmation Mot de passe :
+                Confirmation Mot de passe <br />
                 <input
+                  className="border rounded w-80"
                   onChange={(e) => setPasswordConfirmation(e.target.value)}
                   type="password"
                   name="password_confirmation"
                 />
               </label>
+              <div className="flex border w-80 justify-center items-center bg-green-500 text-white">
+                <button type="submit">S'Enregistrer</button>
+              </div>
             </div>
-            <button type="submit">S'enregistrer</button>
           </form>
         </div>
       </div>

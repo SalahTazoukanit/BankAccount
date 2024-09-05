@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Header from "../../components/header/Header";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -22,35 +23,42 @@ const Login = () => {
         const token = response.data.token;
         localStorage.setItem("token", token);
         alert(response.data.message);
-        navigate("/");
+        navigate("/dashboard");
       });
   };
   return (
     <>
       <div>
+        <Header />
+      </div>
+      <div className="flex flex-col justify-center items-center mt-16 gap-10">
         <div>
           <h1>Se connecter</h1>
         </div>
         <form onSubmit={(e) => login(e)}>
-          <div>
+          <div className="flex flex-col justify-center items-center gap-10">
             <label htmlFor="">
-              Email :
+              Email <br />
               <input
+                className="border rounded w-80"
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 name="email"
               />
             </label>
             <label htmlFor="">
-              Password :
+              Password <br />
               <input
+                className="border rounded w-80"
                 onChange={(e) => setPassword(e.target.value)}
                 type="password"
                 name="password"
               />
             </label>
+            <div className="flex border w-80 justify-center items-center bg-green-500 text-white">
+              <button type="submit">Se Connecter</button>
+            </div>
           </div>
-          <button type="submit">Se Connecter</button>
         </form>
       </div>
     </>
