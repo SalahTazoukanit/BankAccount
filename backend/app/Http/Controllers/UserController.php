@@ -196,4 +196,12 @@ class UserController extends Controller
             ], 401);
         }
     }
+
+    public function getUser(String $id){
+        $user = User::find($id);
+
+        return response()->json([
+            "user"=> $user
+        ]);
+    }
 }

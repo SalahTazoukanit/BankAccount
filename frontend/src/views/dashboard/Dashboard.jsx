@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import Doughnut from "../../components/doughnut/Doughnut";
+import Graphic from "../../components/doughnut/Graphic";
+import Calculate from "../../components/calculate/Calculate";
 
 const Dashboard = () => {
   const [transactions, setTransactions] = useState([]);
@@ -14,10 +15,11 @@ const Dashboard = () => {
 
   const logout = () => {
     axios
-      .post("http://127.0.0.1:8000/api/v1/users/logout", { headers })
+      .post("http://127.0.0.1:8000/api/v1/users/logout", {}, { headers })
       .then((response) => {
         console.log(response);
         alert(response.data.message);
+        localStorage.removeItem("token");
         navigate("/");
       });
   };
@@ -69,9 +71,14 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="text-center">
+      <div className="flex flex-col justify-center items-center text-center">
         <h2>Graphics</h2>
-        <Doughnut />
+        <div className="w-80">
+          <Graphic />
+        </div>
+      </div>
+      <div>
+        <Calculate />
       </div>
       <div className="flex flex-col justify-center items-center gap-5 m-5">
         <h2 className="text-center">Transactions effectuées</h2>

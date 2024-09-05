@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/transactions/delete/{id}', [TransactionController::class, 'destroy'])->name("transactions.delete");
 
     Route::post('/users/logout', [UserController::class, 'logout'])->name("logout.user");
+    Route::get('/users/{id}', [UserController::class, 'getUser'])->name("get.user");
 });
 });
 
