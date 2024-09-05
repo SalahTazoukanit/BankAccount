@@ -13,7 +13,6 @@
 
 ## À propos
 
-
 //Ceci c'est une application MVP (Produit Minimum Viable) pour gerer ses propre finances en utilisan une API en Laravel (framework PHP) et en creant pour chaque route son propre SWAGGER.
 
 ## Prérequis
@@ -30,7 +29,7 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 1. Clonez le dépôt Git :
 
     ```terminal
-    git clone git@github.com:SalahTazoukanit/BankAccount.git   
+    git clone git@github.com:SalahTazoukanit/BankAccount.git
     cd app-bank-account
     ```
 
@@ -44,28 +43,28 @@ Avant de commencer, assurez-vous d'avoir les outils suivants installés sur votr
 
 1. Lancer la migration de la base de données :
 
-   ```terminal
-    php artisan migrate
+    ```terminal
+     php artisan migrate
     ```
 
 2. Lancer le seeder :
 
-  ```terminal
-    php artisan db:seed
-    ```
+````terminal
+  php artisan db:seed
+  ```
 
 ## D2marage du server
 
 1. Commande pour lancer le server :
 
- ```terminal
-    php artisan serve
-    ```
+```terminal
+  php artisan serve
+  ```
 
 ## Génération de la documentation API avec Swagger
 
 1. Commande pour lancer la génération du swagger
 
 ```terminal
-  php artisan l5-swagger:generate
-```
+php artisan l5-swagger:generate
+````
