@@ -17,6 +17,7 @@ const Dashboard = () => {
       .post("http://127.0.0.1:8000/api/v1/users/logout", { headers })
       .then((response) => {
         console.log(response);
+        alert(response.data.message);
         navigate("/");
       });
   };
@@ -35,7 +36,7 @@ const Dashboard = () => {
         headers,
       })
       .then((response) => {
-        window.location.reload();
+        window.location.reload(false);
       });
   };
 
@@ -64,7 +65,7 @@ const Dashboard = () => {
         </div>
         <div className="flex items-center">
           <div className="flex border justify-center items-center bg-red-500 text-white">
-            <button onClick={logout}>Deconnexion</button>
+            <button onClick={logout}>Déconnexion</button>
           </div>
         </div>
       </div>
