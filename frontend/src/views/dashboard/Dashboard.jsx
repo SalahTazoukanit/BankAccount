@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Graphic from "../../components/doughnut/Graphic";
 import Calculate from "../../components/calculate/Calculate";
+import Transaction from "../../components/transaction/Transaction";
 
 const Dashboard = () => {
   const [transactions, setTransactions] = useState([]);
@@ -89,43 +90,10 @@ const Dashboard = () => {
           <h3 className="w-1/6">Type</h3>
           <h3 className="w-1/6">Date</h3>
         </div>
+      </div>
+      <div className="flex flex-col justify-center items-center gap-5 m-5">
         {transactions.map((transaction) => (
-          <div
-            className="flex items-center justify-center gap-3 border rounded w-full p-2"
-            key={transaction.id}
-          >
-            <h3 className="w-1/6">{transaction.title}</h3>
-            <h3 className="w-1/6">{transaction.description}</h3>
-            {transaction.type === "incomings" ? (
-              <h3 className="text-green-500 w-1/6">
-                {"+" + transaction.amount + " €"}
-              </h3>
-            ) : (
-              <h3 className="text-red-500 w-1/6">
-                {"-" + transaction.amount + " €"}
-              </h3>
-            )}
-
-            {transaction.type === "incomings" ? (
-              <h3 className="text-green-500 w-1/6">{transaction.type}</h3>
-            ) : (
-              <h3 className="text-red-500 w-1/6">{transaction.type}</h3>
-            )}
-            <h3 className="w-1/6">{transaction.date}</h3>
-            <div className="flex gap-5">
-              <NavLink>
-                <button className="rounded bg-green-950 text-white">
-                  Voir plus
-                </button>
-              </NavLink>
-              <button
-                onClick={(e) => deleteTransaction(e, transaction.id)}
-                className="rounded bg-red-600 text-white"
-              >
-                Supprimer
-              </button>
-            </div>
-          </div>
+          <Transaction key={transaction.id} transaction={transaction} />
         ))}
       </div>
     </>
