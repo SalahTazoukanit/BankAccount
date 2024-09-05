@@ -59,11 +59,18 @@ const Register = () => {
                 {" "}
                 Mot de passe <br />
                 <input
-                  className="border rounded w-80"
+                  className="border rounded w-80 "
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   name="password"
                 />
+                <br />
+                <span className="flex justify-center items-center text-xs">
+                  <p>
+                    Au moins un caractère special, <br /> une chiffre et une
+                    majuscule. Min :8
+                  </p>
+                </span>
               </label>
               <label htmlFor="">
                 {" "}

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import Graphic from "../../components/doughnut/Graphic";
+import Graphic from "../../components/graphic/Graphic";
 import Calculate from "../../components/calculate/Calculate";
 import Transaction from "../../components/transaction/Transaction";
 
@@ -72,14 +72,13 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center text-center">
-        <h2>Graphics</h2>
-        <div className="w-80">
+      <div className="flex justify-center items-center text-center p-10 gap-10">
+        <div>
           <Graphic />
         </div>
-      </div>
-      <div>
-        <Calculate />
+        <div>
+          <Calculate />
+        </div>
       </div>
       <div className="flex flex-col justify-center items-center gap-5 m-5">
         <h2 className="text-center">Transactions effectuées</h2>

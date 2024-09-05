@@ -5,6 +5,7 @@ const Calculate = () => {
   const [transactions, setTransactions] = useState([]);
   const [incomings, setIncomings] = useState(0);
   const [outgoings, setOutgoings] = useState(0);
+  const [difference, setDifference] = useState(0);
   const token = localStorage.getItem("token");
   const headers = {
     Authorization: "Bearer " + token,
@@ -28,11 +29,11 @@ const Calculate = () => {
           }
         });
 
+        let difference = totalIncomings - totalOutgoings;
+
         setIncomings(totalIncomings);
         setOutgoings(totalOutgoings);
-      })
-      .catch((error) => {
-        console.error("Erreur:", error);
+        setDifference(difference);
       });
   };
 
@@ -42,18 +43,27 @@ const Calculate = () => {
 
   return (
     <>
-      <div className="flex w-full justify-center">
-        <div className="flex justify-center items-center gap-10 mt-10 w-1/2">
-          <div className="flex flex-col justify-center items-center border rounded-lg p-5 text-white bg-green-500 w-1/3">
-            <h3>Crédit:</h3>
+      <div className="flex w-full justify-center items-center gap-5">
+        <div className="flex flex-col justify-center items-center gap-5 mt-10">
+          <div className="flex flex-col justify-center items-center border rounded-lg p-5 text-white bg-green-500 w-full">
+            <h3>Crédit :</h3>
             <h2>{incomings + "€"}</h2>
             <p className="text-white">Total du montant reçu</p>
           </div>
-          <div className="flex flex-col justify-center items-center border rounded-lg p-5 text-white bg-red-500 w-1/3">
-            <h3>Crédit:</h3>
-            <h2>{outgoings + "€"}</h2>
+          <div className="flex flex-col justify-center items-center border rounded-lg p-5 text-white bg-red-500 w-full">
+            <h3>Débit :</h3>
+            <h2>{"-" + outgoings + "€"}</h2>
             <p className="text-white">Total des depenses faites</p>
           </div>
+        </div>
+        <div className="flex flex-col justify-center items-center border rounded-lg p-5 text-white bg-yellow-500 w-80 h-32">
+          <h3>Difference :</h3>
+          {difference > 0 ? (
+            <h2 className="text-green-600">{difference + "€"}</h2>
+          ) : (
+            <h2 className="text-red-600">{difference + "€"}</h2>
+          )}
+          <p className="text-white">Total des depenses faites</p>
         </div>
       </div>
     </>
