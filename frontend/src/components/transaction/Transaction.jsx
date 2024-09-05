@@ -1,5 +1,21 @@
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+
 const Transaction = ({ transaction }) => {
+  const token = localStorage.getItem("token");
+  const headers = {
+    Authorization: "Bearer " + token,
+  };
+
+  const deleteTransaction = (e, id) => {
+    axios
+      .delete("http://127.0.0.1:8000/api/v1/transactions/delete/" + id, {
+        headers,
+      })
+      .then((response) => {
+        window.location.reload(false);
+      });
+  };
   return (
     <>
       <div className="flex items-center justify-center gap-3 border rounded w-full p-2">

@@ -33,16 +33,6 @@ const Dashboard = () => {
       });
   };
 
-  const deleteTransaction = (e, id) => {
-    axios
-      .delete("http://127.0.0.1:8000/api/v1/transactions/delete/" + id, {
-        headers,
-      })
-      .then((response) => {
-        window.location.reload(false);
-      });
-  };
-
   useEffect(() => {
     getTransactions();
   }, []);
