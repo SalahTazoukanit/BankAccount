@@ -67,8 +67,8 @@ const Register = () => {
                 <br />
                 <span className="flex justify-center items-center text-xs">
                   <p>
-                    Au moins un caractère special, <br /> un chiffre et une
-                    majuscule. Min :8
+                    Un caractère special, <br /> un chiffre et une majuscule.
+                    Min :8
                   </p>
                 </span>
               </label>
