@@ -8,6 +8,7 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
+  const navigate = useNavigate();
 
   const registerUser = (e) => {
     e.preventDefault();
@@ -18,7 +19,6 @@ const Register = () => {
       password_confirmation: password_confirmation,
     };
 
-    const navigate = useNavigate();
     axios
       .post("http://127.0.0.1:8000/api/v1/users/register", user)
       .then((response) => {
@@ -46,7 +46,6 @@ const Register = () => {
                 />
               </label>
               <label htmlFor="">
-                {" "}
                 Email <br />
                 <input
                   className="border rounded w-80"
@@ -56,7 +55,6 @@ const Register = () => {
                 />
               </label>
               <label htmlFor="">
-                {" "}
                 Mot de passe <br />
                 <input
                   className="border rounded w-80 "
@@ -72,7 +70,6 @@ const Register = () => {
                 </span>
               </label>
               <label htmlFor="">
-                {" "}
                 Confirmation Mot de passe <br />
                 <input
                   className="border rounded w-80"
