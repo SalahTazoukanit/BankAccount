@@ -110,7 +110,7 @@ class UserController extends Controller
      *         description="Connexion réussie",
      *         @OA\JsonContent(
      *             type="object",
-     *             @OA\Property(property="message", type="string", example="Log successfully"),
+     *             @OA\Property(property="message", type="string", example="Vous vous êtes bien connecté(e)"),
      *             @OA\Property(property="token", type="string", example="2|abcdefghijklmnopqrst"),
      *             @OA\Property(property="user", ref="#/components/schemas/User")
      *         )
@@ -120,7 +120,7 @@ class UserController extends Controller
      *         description="Identifiants invalides",
      *         @OA\JsonContent(
      *             type="object",
-     *             @OA\Property(property="message", type="string", example="Invalid credentials")
+     *             @OA\Property(property="message", type="string", example="Données invalides.")
      *         )
      *     )
      * )
@@ -143,12 +143,12 @@ class UserController extends Controller
             $token = $user->createToken('authToken', ['*'])->plainTextToken;
 
             return response()->json([
-                'message' => 'Log successfully',
+                'message' => 'Vous vous êtes bien connecté(e)',
                 'token' => $token,
                 'user' => $user
             ]);
         } else {
-            return response()->json(['message' => 'Invalid credentials'], 401);
+            return response()->json(['message' => 'Données invalides .'], 401);
         }
     }
 
@@ -197,11 +197,48 @@ class UserController extends Controller
         }
     }
 
-    public function getUser(String $id){
+    /**
+     * @OA\Get(
+     *     path="/user/{id}",
+     *     summary="Récupère les informations d'un utilisateur par ID",
+     *     tags={"Users"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="string"),
+     *         description="ID de l'utilisateur"
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Informations de l'utilisateur récupérées avec succès",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="user", ref="#/components/schemas/User")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Utilisateur non trouvé",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="User not found")
+     *         )
+     *     )
+     * )
+     */
+    public function getUser(String $id)
+    {
         $user = User::find($id);
 
-        return response()->json([
-            "user"=> $user
-        ]);
+        if ($user) {
+            return response()->json([
+                "user" => $user
+            ]);
+        } else {
+            return response()->json([
+                "message" => "User not found"
+            ], 404);
+        }
     }
 }

@@ -18,7 +18,7 @@
                     "Transactions"
                 ],
                 "summary": "Get list of all transactions",
-                "description": "Retrieve all transactions in the system",
+                "description": "Retrieve all transactions for the authenticated user",
                 "operationId": "getTransactions",
                 "responses": {
                     "200": {
@@ -34,7 +34,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -358,7 +363,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Log successfully"
+                                            "example": "Vous vous êtes bien connecté(e)"
                                         },
                                         "token": {
                                             "type": "string",
@@ -381,7 +386,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Invalid credentials"
+                                            "example": "Données invalides."
                                         }
                                     },
                                     "type": "object"
@@ -433,6 +438,59 @@
                                         "status_code": {
                                             "type": "integer",
                                             "example": 401
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Récupère les informations d'un utilisateur par ID",
+                "operationId": "4826814dc6639c07a116bb14cc3fced1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de l'utilisateur",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Informations de l'utilisateur récupérées avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "User not found"
                                         }
                                     },
                                     "type": "object"

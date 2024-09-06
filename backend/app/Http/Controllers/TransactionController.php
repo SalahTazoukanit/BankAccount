@@ -20,8 +20,9 @@ class TransactionController extends Controller
      *     path="/api/transactions",
      *     tags={"Transactions"},
      *     summary="Get list of all transactions",
-     *     description="Retrieve all transactions in the system",
+     *     description="Retrieve all transactions for the authenticated user",
      *     operationId="getTransactions",
+     *     security={{"sanctum":{}}},
      *     @OA\Response(
      *         response=200,
      *         description="List of transactions",
@@ -217,10 +218,16 @@ class TransactionController extends Controller
     public function destroy(String $id)
     {
         $transaction = Transaction::find($id);
-        $transaction->delete();
+        if ($transaction) {
+            $transaction->delete();
 
-        return response()->json([
-            "message" => "Transaction supprimée."
-        ], 200);
+            return response()->json([
+                "message" => "Transaction supprimée."
+            ], 200);
+        } else {
+            return response()->json([
+                "message" => "Transaction non trouvée."
+            ], 404);
+        }
     }
 }
