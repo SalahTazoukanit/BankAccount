@@ -50,14 +50,14 @@ const Dashboard = () => {
 
         <div className="flex flex-col m-5">
           <h1>Bienvenue sur le Dashboard </h1>
-          <div className="flex border w-80 justify-center items-center bg-green-500 text-white">
+          <div className="flex border rounded p-1 w-80 justify-center items-center bg-green-500 text-white">
             <NavLink to={"/dashboard/add-transaction"}>
               <button>Ajouter une transaction</button>
             </NavLink>
           </div>
         </div>
         <div className="flex items-center">
-          <div className="flex border justify-center items-center bg-red-500 text-white">
+          <div className="flex border rounded p-1 justify-center items-center bg-red-500 text-white">
             <button onClick={logout}>Déconnexion</button>
           </div>
         </div>

@@ -20,7 +20,7 @@ const Transaction = ({ transaction }) => {
     <>
       <div className="flex items-center justify-center gap-3 border rounded w-full p-2">
         <h3 className="w-1/6">{transaction.title}</h3>
-        <h3 className="w-1/6">{transaction.description}</h3>
+        <p className="w-1/6">{transaction.description}</p>
         {transaction.type === "incomings" ? (
           <h3 className="text-green-500 w-1/6">
             {"+" + transaction.amount + " €"}
@@ -38,14 +38,14 @@ const Transaction = ({ transaction }) => {
         )}
         <h3 className="w-1/6">{transaction.date}</h3>
         <div className="flex gap-5">
-          <NavLink>
-            <button className="rounded bg-green-950 text-white">
+          <NavLink to={`/dashboard/transaction-detail/${transaction.id}`}>
+            <button className="rounded bg-green-950 text-white p-1">
               Voir plus
             </button>
           </NavLink>
           <button
             onClick={(e) => deleteTransaction(e, transaction.id)}
-            className="rounded bg-red-600 text-white"
+            className="rounded bg-red-600 text-white p-1"
           >
             Supprimer
           </button>
