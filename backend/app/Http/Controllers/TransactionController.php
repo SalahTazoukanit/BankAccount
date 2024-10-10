@@ -81,7 +81,7 @@ class TransactionController extends Controller
 
         $request->validate([
             'title' => 'string|required',
-            'description' => 'string|sometimes',
+            'description' => 'string|sometimes|max:1000',
             'date' => 'date|sometimes',
             'amount' => 'numeric|required',
             'type' => 'required|in:incomings,outgo',
