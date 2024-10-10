@@ -56,8 +56,8 @@ class UserTest extends TestCase
 
         $response->assertStatus(422);
 
-        $response->assertJson([
-            'message' => 'Champ email pas valide.',
+        $response->assertJsonFragment([
+            'email' => ['validation.email'],
         ]);
     }
 }
